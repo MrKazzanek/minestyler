@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (selectedItems[item.category] && selectedItems[item.category].id === item.id) {
                 delete selectedItems[item.category];
             } else if (selectedItems[item.category]) {
-                showModal('Błąd wyboru', `Możesz mieć tylko jeden przedmiot z kategorii "${item.category}". Odznacz najpierw "${selectedItems[item.category].name}".`);
+                showModal('Selection error', `You can only have one item from category "${item.category}". Uncheck first "${selectedItems[item.category].name}".`);
             } else {
                 selectedItems[item.category] = item;
             }
