@@ -12,5 +12,16 @@ const clothesData = [
     videoUrl: "movie/anim1.mp4",
     textureUrl: "https://i.ibb.co/hxBGzrvK/MCC-Cape-Armlets-Steve.png",
   },
+  {
+    id: 2,
+    name: "MCC Cape Armlets (Alex)",
+    description: "These armlets pads match the MCC Cape from the MCC x Minecraft 15th Anniversary Party event.",
+    author: "MrKazanek",
+    authorLink: "https://bio.link/mrkazanek",
+    category: "Armlets",
+    imageUrl: "https://i.ibb.co/mFrK7F5V/Mine-Styler-images-alex.png",
+    videoUrl: "movie/anim2.mp4",
+    textureUrl: "https://i.ibb.co/zYt4N1n/MCC-Armlets-Alex.png",
+  },
   // Dodaj więcej przedmiotów w tym formacie
 ];
