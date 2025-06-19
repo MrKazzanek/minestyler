@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Kodu Ubrania - Skin Styler</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <style>
+        :root {
+            --font-family: 'Poppins', sans-serif;
+            --bg-color: #f4f7f9;
+            --panel-bg-color: #ffffff;
+            --text-color: #2c3e50;
+            --text-light-color: #7f8c8d;
+            --accent-color: #27ae60; /* Zielony dla generatora */
+            --accent-hover-color: #229954;
+            --border-color: #e0e6ed;
+            --shadow-color: rgba(44, 62, 80, 0.1);
+            --code-bg: #2d3436;
+            --code-color: #dfe6e9;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: var(--panel-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            padding: 2rem;
+            width: 100%;
+            max-width: 700px;
+        }
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { color: var(--accent-color); margin-bottom: 0.5rem; }
+        header p { color: var(--text-light-color); }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        label { font-weight: 600; font-size: 0.9rem; }
+        label small { font-weight: 400; color: var(--text-light-color); }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #fff;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+        }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        button {
+            flex-grow: 1;
+            padding: 0.8rem 1.2rem;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+        }
+        #generate-btn { background-color: var(--accent-color); }
+        #generate-btn:hover { background-color: var(--accent-hover-color); }
+        #clear-btn { background-color: #bdc3c7; }
+        #clear-btn:hover { background-color: #95a5a6; }
+
+        #output-container {
+            margin-top: 2rem;
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        #copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #7f8c8d;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        #copy-btn:hover { background-color: #95a5a6; }
+
+        pre { margin: 0; }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--code-color);
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Generator Kodu Ubrania</h1>
+            <p>Wypełnij formularz, aby wygenerować kod do wklejenia w pliku <code>clothes.js</code>.</p>
+        </header>
+
+        <form id="item-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="id">ID <small>(unikalny numer, np. 3)</small></label>
+                    <input type="number" id="id" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nazwa przedmiotu</label>
+                    <input type="text" id="name" placeholder="np. Diamentowy hełm" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="description">Opis</label>
+                    <textarea id="description" placeholder="Krótki opis, który pojawi się na kafelku." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="author">Autor</label>
+                    <input type="text" id="author" placeholder="Twój nick" required>
+                </div>
+                <div class="form-group">
+                    <label for="authorLink">Link do autora (URL)</label>
+                    <input type="url" id="authorLink" placeholder="np. https://twitter.com/twoj_nick">
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategoria</label>
+                    <select id="category">
+                        <option value="Nakrycia głowy">Nakrycia głowy</option>
+                        <option value="Naramienniki">Naramienniki</option>
+                        <option value="other">Inna (wpisz poniżej)</option>
+                    </select>
+                </div>
+                <div class="form-group hidden" id="new-category-group">
+                    <label for="new-category">Nowa kategoria</label>
+                    <input type="text" id="new-category" placeholder="np. Plecaki">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="imageUrl">Ścieżka do obrazka podglądu</label>
+                    <input type="text" id="imageUrl" placeholder="assets/nazwa_obrazka.png" required>
+                </div>
+                 <div class="form-group full-width">
+                    <label for="videoUrl">Ścieżka do wideo podglądu</label>
+                    <input type="text" id="videoUrl" placeholder="assets/nazwa_wideo.mp4" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="textureUrl">Ścieżka do tekstury (64x64px)</label>
+                    <input type="text" id="textureUrl" placeholder="assets/nazwa_textury.png" required>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="generate-btn">Generuj Kod</button>
+                <button type="button" id="clear-btn">Wyczyść formularz</button>
+            </div>
+        </form>
+
+        <div id="output-container" class="hidden">
+            <button id="copy-btn">Kopiuj kod</button>
+            <pre><code id="output-code"></code></pre>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('item-form');
+        const categorySelect = document.getElementById('category');
+        const newCategoryGroup = document.getElementById('new-category-group');
+        const outputContainer = document.getElementById('output-container');
+        const outputCode = document.getElementById('output-code');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+
+        // Pokaż/ukryj pole na nową kategorię
+        categorySelect.addEventListener('change', () => {
+            if (categorySelect.value === 'other') {
+                newCategoryGroup.classList.remove('hidden');
+            } else {
+                newCategoryGroup.classList.add('hidden');
+            }
+        });
+
+        // Generowanie kodu
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const sanitize = (str) => str.replace(/"/g, '\\"');
+
+            const id = document.getElementById('id').value;
+            const name = sanitize(document.getElementById('name').value);
+            const description = sanitize(document.getElementById('description').value);
+            const author = sanitize(document.getElementById('author').value);
+            const authorLink = document.getElementById('authorLink').value;
+            const imageUrl = document.getElementById('imageUrl').value;
+            const videoUrl = document.getElementById('videoUrl').value;
+            const textureUrl = document.getElementById('textureUrl').value;
+
+            let category = categorySelect.value;
+            if (category === 'other') {
+                category = sanitize(document.getElementById('new-category').value);
+            }
+            
+            if (!id || !name || !description || !author || !category || !imageUrl || !videoUrl || !textureUrl) {
+                alert('Proszę wypełnić wszystkie wymagane pola!');
+                return;
+            }
+
+            const code = `
+  {
+    id: ${id},
+    name: "${name}",
+    description: "${description}",
+    author: "${author}",
+    authorLink: "${authorLink}",
+    category: "${category}",
+    imageUrl: "${imageUrl}",
+    videoUrl: "${videoUrl}",
+    textureUrl: "${textureUrl}",
+  },`;
+
+            outputCode.textContent = code;
+            outputContainer.classList.remove('hidden');
+        });
+
+        // Kopiowanie kodu
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(outputCode.textContent).then(() => {
+                copyBtn.textContent = 'Skopiowano!';
+                setTimeout(() => {
+                    copyBtn.textContent = 'Kopiuj kod';
+                }, 2000);
+            }).catch(err => {
+                alert('Błąd kopiowania: ', err);
+            });
+        });
+        
+        // Czyszczenie formularza
+        clearBtn.addEventListener('click', () => {
+            form.reset();
+            outputContainer.classList.add('hidden');
+            newCategoryGroup.classList.add('hidden');
+        });
+
+    </script>
+</body>
+</html>
