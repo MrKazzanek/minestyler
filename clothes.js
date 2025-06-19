@@ -1,7 +1,6 @@
 // clothes.js (WERSJA ZE ŚCIEŻKAMI - WYMAGA LIVE SERVER)
 
 const clothesData = [
-  
   {
     id: 1,
     name: "MCC Cape Armlets (Steve)",
