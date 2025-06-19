@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kreator Skinów Minecraft</title>
+    <title>MineStyler</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
     <script src="https://unpkg.com/phosphor-icons"></script>
@@ -13,36 +13,36 @@
     <header>
         <div class="logo">
             <i class="ph-t-shirt-fill"></i>
-            <h1>Skin Styler</h1>
+            <h1>MineStyler</h1>
         </div>
         <div class="controls">
             <div class="theme-switcher">
-                <button id="theme-system" class="active" title="Motyw systemowy"><i class="ph-monitor-fill"></i></button>
-                <button id="theme-light" title="Motyw jasny"><i class="ph-sun-fill"></i></button>
-                <button id="theme-dark" title="Motyw ciemny"><i class="ph-moon-fill"></i></button>
+                <button id="theme-system" class="active" title="System theme"><i class="ph-monitor-fill"></i></button>
+                <button id="theme-light" title="Bright theme"><i class="ph-sun-fill"></i></button>
+                <button id="theme-dark" title="Dark theme"><i class="ph-moon-fill"></i></button>
             </div>
         </div>
     </header>
 
     <main>
         <aside class="preview-panel">
-            <h2>Podgląd Textury</h2>
+            <h2>Preview</h2>
             <div id="skin-viewer-container">
-                <p class="placeholder-text">Wgraj plik skina, aby rozpocząć!</p>
+                <p class="placeholder-text">Upload your skin file to get started!</p>
             </div>
             
             <div class="skin-controls">
                 <input type="file" id="skin-upload-input" accept="image/png" style="display: none;">
-                <button id="upload-btn"><i class="ph-upload-simple-fill"></i> Wgraj</button>
-                <button id="download-btn" disabled><i class="ph-download-simple-fill"></i> Pobierz</button>
+                <button id="upload-btn"><i class="ph-upload-simple-fill"></i> Upload</button>
+                <button id="download-btn" disabled><i class="ph-download-simple-fill"></i> Download</button>
             </div>
             
             <div id="selected-items-container" class="hidden">
-                <h3>Wybrane elementy:</h3>
+                <h3>Selected items:</h3>
                 <ul id="selected-items-list">
                     <!-- Tutaj JS doda wybrane elementy -->
                 </ul>
-                <button id="clear-selection-btn">Wyczyść wszystko</button>
+                <button id="clear-selection-btn">Clear everything</button>
             </div>
         </aside>
 
@@ -50,12 +50,12 @@
             <div class="search-and-filter">
                 <div class="search-bar">
                     <i class="ph-magnifying-glass-fill"></i>
-                    <input type="text" id="search-input" placeholder="Szukaj po nazwie, autorze, opisie...">
+                    <input type="text" id="search-input" placeholder="Search by name, author, description...">
                 </div>
                 <div class="filter-bar">
-                    <label for="category-filter">Kategorie:</label>
+                    <label for="category-filter">Categories:</label>
                     <select id="category-filter">
-                        <option value="all">Wszystkie</option>
+                        <option value="all">All<option>
                     </select>
                 </div>
             </div>
@@ -67,9 +67,9 @@
 
     <div id="modal-overlay" class="hidden">
         <div id="modal-box">
-            <h3 id="modal-title">Uwaga</h3>
-            <p id="modal-message">Możesz wybrać tylko jeden przedmiot z danej kategorii.</p>
-            <button id="modal-close-btn">Rozumiem</button>
+            <h3 id="modal-title">Attention</h3>
+            <p id="modal-message">You can only select one item from a given category.</p>
+            <button id="modal-close-btn">I understand.</button>
         </div>
     </div>
     
