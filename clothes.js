@@ -2,7 +2,7 @@
 
 const clothesData = [
   {
-    id: 1,
+    id: 2,
     name: "MCC Cape Armlets (Steve)",
     description: "These armlets pads match the MCC Cape from the MCC x Minecraft 15th Anniversary Party event.",
     author: "MrKazanek",
@@ -13,7 +13,7 @@ const clothesData = [
     textureUrl: "https://i.ibb.co/hxBGzrvK/MCC-Cape-Armlets-Steve.png",
   },
   {
-    id: 2,
+    id: 1,
     name: "MCC Cape Armlets (Alex)",
     description: "These armlets pads match the MCC Cape from the MCC x Minecraft 15th Anniversary Party event.",
     author: "MrKazanek",
