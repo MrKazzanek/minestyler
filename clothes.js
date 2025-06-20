@@ -1,6 +1,18 @@
 // clothes.js (WERSJA ZE ŚCIEŻKAMI - WYMAGA LIVE SERVER)
 
 const clothesData = [
+  
+  {
+    id: 4,
+    name: "Mojang Office Cape Armlets (Alex)",
+    description: "These Armlets are a perfect match for the Mojang Office Cape from the Eerie Mojang office party event.",
+    author: "MrKazanek",
+    authorLink: "https://bio.link/mrkazanek",
+    category: "Armlets",
+    imageUrl: "https://i.ibb.co/v6m2Vn6B/Mojang-Office-Cape-Armlets-Alex-Previev.png",
+    videoUrl: "movie/anim4.mp4",
+    textureUrl: "https://i.ibb.co/VWwF4mjg/Mojang-Office-Cape-Armlets-Alex.png",
+  },
   {
     id: 3,
     name: "Mojang Office Cape Armlets (Steve)",
