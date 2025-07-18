@@ -1,4 +1,4 @@
-/* === MINESTYLER v4.0 - "FOCUS MODE" DESIGN === */
+/* === MINESTYLER - THE DEFINITIVE EDITION === */
 
 /* --- 1. Zmienne i Globalny Reset --- */
 :root {
@@ -52,7 +52,6 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-light-color); }
 
-
 /* --- 3. Nagłówek --- */
 header {
     flex-shrink: 0; display: flex;
@@ -72,16 +71,19 @@ header .logo img { height: 32px; }
 .theme-switcher button:hover { color: var(--accent-color); }
 .theme-switcher button.active { color: var(--accent-color); background-color: var(--panel-bg-color); box-shadow: 0 1px 3px var(--shadow-color); }
 
-
-/* --- 4. Główny Układ "FOCUS MODE" --- */
+/* --- 4. Główny Układ Dwukolumnowy --- */
 main {
     display: grid;
-    /* Dwie kolumny: stała (podgląd) i elastyczna (treść) */
-    grid-template-columns: 380px 1fr; 
+    grid-template-columns: 1fr 380px; /* Lewa (elastyczna), Prawa (stała) */
     gap: 2rem;
     padding: 2rem;
     flex-grow: 1;
     overflow: hidden;
+}
+
+.content-panel { /* Lewa kolumna - "Szafa" */
+    display: flex; flex-direction: column;
+    gap: 1.5rem; overflow: hidden;
 }
 
 .preview-panel { /* Prawa kolumna - "Manekin" */
@@ -90,51 +92,7 @@ main {
     position: sticky; top: 2rem; /* Kluczowe dla "przyklejonej" kolumny */
 }
 
-.content-panel { /* Lewa kolumna - "Szafa" */
-    display: flex; flex-direction: column;
-    gap: 1.5rem; overflow: hidden;
-}
-
-/* --- 5. Panel Podglądu ("Manekin") --- */
-.preview-panel-card {
-    background-color: var(--panel-bg-color);
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 2px 8px var(--shadow-color);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-.preview-panel > h2 { display: none; } /* Tytuł jest teraz w karcie */
-.preview-panel > #selected-items-container {
-    background: var(--panel-bg-color); padding: 1.5rem;
-    border-radius: var(--radius-lg); flex-grow: 1; min-height: 0;
-    display: flex; flex-direction: column; gap: 1rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
-}
-.preview-panel > #selected-items-container.hidden { display: none !important; }
-
-#skin-viewer-container {
-    width: 100%; aspect-ratio: 1 / 1; background-color: var(--bg-color);
-    border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
-    border: 2px dashed var(--border-color); transition: border-color var(--transition-speed) ease;
-}
-#skin-viewer-container:hover { border-color: var(--accent-color); }
-#skin-viewer-container canvas { width: 100% !important; height: 100% !important; image-rendering: pixelated; }
-.placeholder-text { color: var(--text-light-color); text-align: center; padding: 1rem; }
-.skin-controls { display: flex; gap: 1rem; }
-
-#selected-items-list { list-style-type: none; overflow-y: auto; flex-grow: 1; padding-right: 0.5rem; }
-#selected-items-list li {
-    background-color: var(--bg-color); padding: 0.75rem 1rem; border-radius: var(--radius-sm);
-    margin-bottom: 0.5rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;
-}
-.remove-item-btn { background: none; border: none; color: var(--text-light-color); cursor: pointer; transition: all var(--transition-speed) ease; }
-.remove-item-btn:hover { color: var(--danger-color); transform: scale(1.2); }
-.remove-item-btn i { font-size: 1.2rem; }
-
-
-/* --- 6. Panel z Treścią ("Szafa") --- */
+/* --- 5. Panel z Treścią ("Szafa") --- */
 .search-and-filter {
     background-color: var(--panel-bg-color); padding: 1rem;
     border-radius: var(--radius-lg); display: flex;
@@ -156,17 +114,17 @@ input:focus, select:focus {
 }
 select { padding-left: 1rem; cursor: pointer; }
 
-/* Niezawodna, ostateczna siatka z ubraniami */
+/* OSTATECZNA, NIEZAWODNA SIATKA Z UBRANIAMI */
 #clothes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
     overflow-y: auto;
     padding: 0.5rem;
-    align-items: start;
+    align-items: start; /* NAJWAŻNIEJSZA POPRAWKA: Zapobiega rozciąganiu i ucinaniu treści. */
 }
 
-/* --- 7. Kafelki --- */
+/* --- 6. Kafelki --- */
 .clothing-tile {
     background-color: var(--panel-bg-color); border-radius: var(--radius-md);
     box-shadow: 0 2px 8px var(--shadow-color); overflow: hidden;
@@ -174,7 +132,7 @@ select { padding-left: 1rem; cursor: pointer; }
     display: flex; flex-direction: column; border: 2px solid transparent;
 }
 .clothing-tile:hover { transform: translateY(-5px); box-shadow: 0 8px 24px var(--shadow-color); }
-.clothing-tile.active { border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent); }
+.clothing-tile.active { border-color: var(--accent-color); }
 
 .tile-media { position: relative; width: 100%; aspect-ratio: 1/1; flex-shrink: 0; }
 .tile-media img, .tile-media video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
@@ -184,15 +142,57 @@ select { padding-left: 1rem; cursor: pointer; }
 
 .tile-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; gap: 0.75rem; }
 .tile-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
-.tile-header h4 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+.tile-header h4 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
 .download-icon { color: var(--text-light-color); font-size: 1.5rem; transition: color var(--transition-speed) ease; }
 .download-icon:hover { color: var(--accent-color); }
 
-.tile-description { font-size: 0.9rem; color: var(--text-light-color); line-height: 1.5; flex-grow: 1; }
+.tile-description { font-size: 0.85rem; color: var(--text-light-color); line-height: 1.5; flex-grow: 1; }
 .tile-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .author { color: var(--accent-color); text-decoration: none; font-weight: 600; }
 .author:hover { text-decoration: underline; }
 .category { background-color: var(--bg-color); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); color: var(--text-light-color); }
+
+/* --- 7. Panel Podglądu ("Manekin") --- */
+.preview-panel > h2,
+.preview-panel > #skin-viewer-container,
+.preview-panel > .skin-controls { display: none; /* Ukryj stare elementy, bo są teraz w karcie */ }
+
+.preview-panel-card {
+    background-color: var(--panel-bg-color);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#skin-viewer-container {
+    width: 100%; aspect-ratio: 1 / 1; background-color: var(--bg-color);
+    border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+    border: 2px dashed var(--border-color); transition: border-color var(--transition-speed) ease;
+}
+#skin-viewer-container:hover { border-color: var(--accent-color); }
+#skin-viewer-container canvas { width: 100% !important; height: 100% !important; image-rendering: pixelated; }
+.placeholder-text { color: var(--text-light-color); text-align: center; padding: 1rem; }
+.skin-controls { display: flex; gap: 1rem; }
+
+.preview-panel > #selected-items-container {
+    background: var(--panel-bg-color); padding: 1.5rem;
+    border-radius: var(--radius-lg); flex-grow: 1; min-height: 0;
+    display: flex; flex-direction: column; gap: 1rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+.preview-panel > #selected-items-container.hidden { display: none !important; }
+
+#selected-items-list { list-style-type: none; overflow-y: auto; flex-grow: 1; padding-right: 0.5rem; }
+#selected-items-list li {
+    background-color: var(--bg-color); padding: 0.75rem 1rem; border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;
+}
+.remove-item-btn { background: none; border: none; color: var(--text-light-color); cursor: pointer; transition: all var(--transition-speed) ease; }
+.remove-item-btn:hover { color: var(--danger-color); transform: scale(1.2); }
+.remove-item-btn i { font-size: 1.2rem; }
 
 /* --- 8. Przyciski i Modal --- */
 button {
@@ -236,14 +236,11 @@ button:disabled { background-color: var(--text-light-color); cursor: not-allowed
     }
     .preview-panel {
         position: static; /* Wyłączenie "przyklejenia" na mobile */
-        order: 2; /* Panel podglądu idzie na dół */
-    }
-    .content-panel {
-        order: 1; /* Panel z ubraniami idzie na górę */
     }
 }
 @media (max-width: 768px) {
     header { flex-direction: column; gap: 1rem; padding: 1rem; }
     main { gap: 1rem; }
     .search-and-filter { flex-direction: column; align-items: stretch; }
+    #clothes-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 }
