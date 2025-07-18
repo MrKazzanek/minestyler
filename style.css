@@ -1,4 +1,4 @@
-/* style.css (OSTATECZNY I POPRAWIONY) */
+/* style.css (OSTATECZNY I PRAWIDŁOWO POPRAWIONY) */
 
 :root {
     --font-family: 'Poppins', sans-serif;
@@ -144,7 +144,7 @@ button i { font-size: 1.2rem; }
     gap: 1.5rem;
     flex-grow: 1;
     min-width: 300px;
-    min-height: 0; /* <-- KLUCZOWA POPRAWKA */
+    min-height: 0;
 }
 .search-and-filter { background-color: var(--panel-bg-color); padding: 1rem; border-radius: 12px; display: flex; gap: 1rem; align-items: center; box-shadow: 0 4px 15px var(--shadow-color); flex-shrink: 0; }
 .search-bar { flex-grow: 1; position: relative; }
@@ -171,7 +171,14 @@ select { padding-left: 1rem; cursor: pointer; }
 .tile-media video { opacity: 0; }
 .clothing-tile:hover .tile-media video { opacity: 1; }
 .clothing-tile:hover .tile-media img { opacity: 0; }
-.tile-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
+
+.tile-info {
+    padding: 1rem;
+    flex: 1; /* <-- ZMIENIONA WŁAŚCIWOŚĆ */
+    display: flex;
+    flex-direction: column;
+}
+
 .tile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
 .tile-header h4 { font-size: 1.1rem; margin-right: 0.5rem; }
 .download-icon { background: none; border: none; color: var(--text-light-color); cursor: pointer; font-size: 1.4rem; padding: 0; transition: color 0.2s ease; }
