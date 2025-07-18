@@ -153,10 +153,21 @@ select { padding-left: 1rem; cursor: pointer; }
     overflow-y: auto;
     padding-right: 1rem;
     align-content: start;
-    align-items: start; /* <-- DODANA POPRAWKA: Zapobiega pionowemu rozciąganiu kafelków, co naprawia błąd z ich wysokością. */
+    /* Usunięto 'align-items: start;' aby przywrócić domyślne rozciąganie */
 }
 
-.clothing-tile { background-color: var(--panel-bg-color); border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; border: 3px solid transparent; }
+.clothing-tile {
+    background-color: var(--panel-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid transparent;
+    margin-bottom: 1rem; /* <-- DODANA POPRAWKA: Zapewnia stały odstęp pod każdym kafelkiem, zapobiegając nachodzeniu. */
+}
 .clothing-tile:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--shadow-color); }
 .clothing-tile.active { border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 4px 15px var(--shadow-color); }
 .tile-media { position: relative; width: 100%; padding-top: 100%; }
