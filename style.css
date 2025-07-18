@@ -147,17 +147,16 @@ input:focus, select:focus { outline: none; border-color: var(--accent-color); bo
 select { padding-left: 1rem; cursor: pointer; }
 
 #clothes-grid {
-    display: flex; /* ZMIANA Z GRID NA FLEX */
-    flex-wrap: wrap; /* Pozwala kafelkom zawijać się do nowego wiersza */
-    gap: 1.5rem; /* Zachowuje odstępy */
-    align-items: flex-start; /* Zapobiega rozciąganiu kafelków i zachowuje ich naturalną wysokość */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
     overflow-y: auto;
     padding-right: 1rem;
 }
 
 .clothing-tile {
-    flex: 1 1 220px; /* Kluczowa zmiana: kafelek ma bazową szerokość 220px, ale może rosnąć, aby wypełnić wiersz */
-    max-width: 300px; /* Opcjonalnie: zapobiega zbytniemu rozciąganiu się kafelków, jeśli w wierszu jest ich mało */
+    flex: 0 1 220px; /* ZMIANA: flex-grow ustawiony na 0, aby zapobiec rozciąganiu. */
     background-color: var(--panel-bg-color);
     border-radius: 12px;
     box-shadow: 0 4px 15px var(--shadow-color);
