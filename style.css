@@ -1,4 +1,4 @@
-/* style.css (OSTATECZNY I POPRAWNY) */
+/* style.css (OSTATECZNY I POPRAWIONY) */
 
 :root {
     --font-family: 'Poppins', sans-serif;
@@ -147,8 +147,13 @@ input:focus, select:focus { outline: none; border-color: var(--accent-color); bo
 select { padding-left: 1rem; cursor: pointer; }
 
 #clothes-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem; overflow-y: auto; padding-right: 1rem; align-content: start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding-right: 1rem;
+    align-content: start;
+    flex-grow: 1; /* <-- DODANA LINIA */
 }
 
 .clothing-tile { background-color: var(--panel-bg-color); border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; border: 3px solid transparent; }
