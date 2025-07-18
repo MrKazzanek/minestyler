@@ -1,27 +1,25 @@
-/* === MINESTYLER v3.0 - "THE WORKSHOP" DESIGN === */
+/* === MINESTYLER v4.0 - "FOCUS MODE" DESIGN === */
 
 /* --- 1. Zmienne i Globalny Reset --- */
 :root {
     --font-family: 'Poppins', sans-serif;
-    --transition-speed: 0.25s;
+    --transition-speed: 0.2s;
 
     /* Jasny Motyw */
-    --bg-color: #eef0f4;
+    --bg-color: #f0f2f5;
     --panel-bg-color: #ffffff;
     --text-color: #050505;
     --text-light-color: #65676b;
     --accent-color: #0866ff;
-    --accent-hover-color: #0058e0;
-    --border-color: #ced0d4;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #dddfe2;
+    --shadow-color: rgba(0, 0, 0, 0.08);
     --danger-color: #fa383e;
     --success-color: #31a24c;
-    --card-border: #e0e0e0;
 
     /* Rozmiary */
-    --radius-sm: 6px;
+    --radius-sm: 8px;
     --radius-md: 12px;
-    --radius-lg: 18px;
+    --radius-lg: 16px;
 }
 
 .dark-theme {
@@ -30,10 +28,8 @@
     --text-color: #e4e6eb;
     --text-light-color: #b0b3b8;
     --accent-color: #1b84ff;
-    --accent-hover-color: #379aff;
     --border-color: #3e4042;
     --shadow-color: rgba(0, 0, 0, 0.3);
-    --card-border: #444;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +46,14 @@ body {
     overflow: hidden;
 }
 
-/* --- 2. Nagłówek --- */
+/* --- 2. Scrollbar --- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-light-color); }
+
+
+/* --- 3. Nagłówek --- */
 header {
     flex-shrink: 0; display: flex;
     justify-content: space-between; align-items: center;
@@ -69,91 +72,35 @@ header .logo img { height: 32px; }
 .theme-switcher button:hover { color: var(--accent-color); }
 .theme-switcher button.active { color: var(--accent-color); background-color: var(--panel-bg-color); box-shadow: 0 1px 3px var(--shadow-color); }
 
-/* --- 3. Nowy Układ Główny "THE WORKSHOP" --- */
+
+/* --- 4. Główny Układ "FOCUS MODE" --- */
 main {
     display: grid;
-    grid-template-columns: 1fr 380px; /* Dwie kolumny: elastyczna i stała */
+    /* Dwie kolumny: stała (podgląd) i elastyczna (treść) */
+    grid-template-columns: 380px 1fr; 
     gap: 2rem;
     padding: 2rem;
     flex-grow: 1;
     overflow: hidden;
 }
 
-.content-panel { /* "Szafa" */
-    display: flex; flex-direction: column;
-    gap: 1.5rem; overflow: hidden;
-}
-
-.preview-panel { /* "Manekin" */
+.preview-panel { /* Prawa kolumna - "Manekin" */
     display: flex; flex-direction: column;
     gap: 1.5rem; max-height: 100%;
     position: sticky; top: 2rem; /* Kluczowe dla "przyklejonej" kolumny */
 }
 
-/* --- 4. Panel z Ubraniami ("Szafa") --- */
-.search-and-filter {
-    background-color: var(--panel-bg-color); padding: 1rem;
-    border-radius: var(--radius-lg); display: flex;
-    gap: 1rem; align-items: center; flex-shrink: 0;
-}
-.search-bar { flex-grow: 1; position: relative; }
-.search-bar i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light-color); }
-input, select {
-    width: 100%; padding: 0.8rem 1rem 0.8rem 2.8rem;
-    border-radius: var(--radius-md); border: 1px solid var(--border-color);
-    background-color: var(--bg-color); color: var(--text-color);
-    font-family: var(--font-family); font-size: 1rem;
-    transition: all var(--transition-speed) ease;
-}
-input:focus, select:focus {
-    outline: none; border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 20%, transparent);
-}
-select { padding-left: 1rem; cursor: pointer; }
-
-/* Niezawodna, ostateczna siatka */
-#clothes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-    overflow-y: auto;
-    padding: 0.5rem; /* By cienie nie były ucięte */
-    align-items: start; /* OSTATECZNA POPRAWKA - ZAPOBIEGA UCIĘCIU TREŚCI */
-}
-
-/* --- 5. Nowy Wygląd Kafelków --- */
-.clothing-tile {
-    background-color: var(--panel-bg-color); border-radius: var(--radius-md);
-    border: 1px solid var(--card-border); overflow: hidden;
-    cursor: pointer; transition: all var(--transition-speed) ease;
+.content-panel { /* Lewa kolumna - "Szafa" */
     display: flex; flex-direction: column;
+    gap: 1.5rem; overflow: hidden;
 }
-.clothing-tile:hover { transform: translateY(-5px); box-shadow: 0 8px 24px var(--shadow-color); border-color: var(--accent-color); }
-.clothing-tile.active { border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent); }
 
-.tile-media { position: relative; width: 100%; aspect-ratio: 1/1; flex-shrink: 0; }
-.tile-media img, .tile-media video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
-.tile-media video { opacity: 0; }
-.clothing-tile:hover .tile-media video { opacity: 1; }
-.clothing-tile:hover .tile-media img { opacity: 0; }
-
-.tile-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; gap: 0.75rem; }
-.tile-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
-.tile-header h4 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
-.download-icon { color: var(--text-light-color); font-size: 1.5rem; }
-.download-icon:hover { color: var(--accent-color); }
-
-.tile-description { font-size: 0.9rem; color: var(--text-light-color); line-height: 1.5; flex-grow: 1; }
-.tile-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
-.author { color: var(--accent-color); text-decoration: none; font-weight: 600; }
-.author:hover { text-decoration: underline; }
-.category { background-color: var(--bg-color); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); color: var(--text-light-color); }
-
-/* --- 6. Panel Podglądu ("Manekin") --- */
+/* --- 5. Panel Podglądu ("Manekin") --- */
 .preview-panel-card {
     background-color: var(--panel-bg-color);
     padding: 1.5rem;
     border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px var(--shadow-color);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -163,6 +110,7 @@ select { padding-left: 1rem; cursor: pointer; }
     background: var(--panel-bg-color); padding: 1.5rem;
     border-radius: var(--radius-lg); flex-grow: 1; min-height: 0;
     display: flex; flex-direction: column; gap: 1rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
 }
 .preview-panel > #selected-items-container.hidden { display: none !important; }
 
@@ -176,7 +124,7 @@ select { padding-left: 1rem; cursor: pointer; }
 .placeholder-text { color: var(--text-light-color); text-align: center; padding: 1rem; }
 .skin-controls { display: flex; gap: 1rem; }
 
-#selected-items-list { list-style-type: none; overflow-y: auto; flex-grow: 1; }
+#selected-items-list { list-style-type: none; overflow-y: auto; flex-grow: 1; padding-right: 0.5rem; }
 #selected-items-list li {
     background-color: var(--bg-color); padding: 0.75rem 1rem; border-radius: var(--radius-sm);
     margin-bottom: 0.5rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;
@@ -185,22 +133,82 @@ select { padding-left: 1rem; cursor: pointer; }
 .remove-item-btn:hover { color: var(--danger-color); transform: scale(1.2); }
 .remove-item-btn i { font-size: 1.2rem; }
 
-/* --- 7. Przyciski --- */
+
+/* --- 6. Panel z Treścią ("Szafa") --- */
+.search-and-filter {
+    background-color: var(--panel-bg-color); padding: 1rem;
+    border-radius: var(--radius-lg); display: flex;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    gap: 1rem; align-items: center; flex-shrink: 0;
+}
+.search-bar { flex-grow: 1; position: relative; }
+.search-bar i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light-color); }
+input, select {
+    width: 100%; padding: 0.8rem 1rem 0.8rem 2.8rem;
+    border-radius: var(--radius-sm); border: 1px solid var(--border-color);
+    background-color: var(--bg-color); color: var(--text-color);
+    font-family: var(--font-family); font-size: 1rem;
+    transition: all var(--transition-speed) ease;
+}
+input:focus, select:focus {
+    outline: none; border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 20%, transparent);
+}
+select { padding-left: 1rem; cursor: pointer; }
+
+/* Niezawodna, ostateczna siatka z ubraniami */
+#clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding: 0.5rem;
+    align-items: start;
+}
+
+/* --- 7. Kafelki --- */
+.clothing-tile {
+    background-color: var(--panel-bg-color); border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px var(--shadow-color); overflow: hidden;
+    cursor: pointer; transition: all var(--transition-speed) ease;
+    display: flex; flex-direction: column; border: 2px solid transparent;
+}
+.clothing-tile:hover { transform: translateY(-5px); box-shadow: 0 8px 24px var(--shadow-color); }
+.clothing-tile.active { border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent); }
+
+.tile-media { position: relative; width: 100%; aspect-ratio: 1/1; flex-shrink: 0; }
+.tile-media img, .tile-media video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+.tile-media video { opacity: 0; }
+.clothing-tile:hover .tile-media video { opacity: 1; }
+.clothing-tile:hover .tile-media img { opacity: 0; }
+
+.tile-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+.tile-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.tile-header h4 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+.download-icon { color: var(--text-light-color); font-size: 1.5rem; transition: color var(--transition-speed) ease; }
+.download-icon:hover { color: var(--accent-color); }
+
+.tile-description { font-size: 0.9rem; color: var(--text-light-color); line-height: 1.5; flex-grow: 1; }
+.tile-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.author { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+.author:hover { text-decoration: underline; }
+.category { background-color: var(--bg-color); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); color: var(--text-light-color); }
+
+/* --- 8. Przyciski i Modal --- */
 button {
     padding: 0.8rem 1.2rem; font-family: var(--font-family); font-weight: 600; font-size: 0.9rem;
-    border: none; border-radius: var(--radius-md); cursor: pointer;
+    border: none; border-radius: var(--radius-sm); cursor: pointer;
     transition: all var(--transition-speed) ease;
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
 }
-button i { font-size: 1.2rem; }
-#upload-btn { background-color: var(--accent-color); color: white; flex-grow: 1; }
-#download-btn { background-color: var(--success-color); color: white; flex-grow: 1; }
-#clear-selection-btn { background-color: var(--danger-color); color: white; }
 button:hover { transform: translateY(-2px); filter: brightness(1.05); }
 button:active { transform: translateY(0); filter: brightness(1); }
 button:disabled { background-color: var(--text-light-color); cursor: not-allowed; transform: none; filter: brightness(0.8); }
 
-/* --- 8. Modal --- */
+#upload-btn { background-color: var(--accent-color); color: white; flex-grow: 1; }
+#download-btn { background-color: var(--success-color); color: white; flex-grow: 1; }
+#clear-selection-btn { background-color: var(--danger-color); color: white; }
+
 #modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
@@ -228,11 +236,14 @@ button:disabled { background-color: var(--text-light-color); cursor: not-allowed
     }
     .preview-panel {
         position: static; /* Wyłączenie "przyklejenia" na mobile */
+        order: 2; /* Panel podglądu idzie na dół */
+    }
+    .content-panel {
+        order: 1; /* Panel z ubraniami idzie na górę */
     }
 }
 @media (max-width: 768px) {
     header { flex-direction: column; gap: 1rem; padding: 1rem; }
     main { gap: 1rem; }
     .search-and-filter { flex-direction: column; align-items: stretch; }
-    #clothes-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 }
