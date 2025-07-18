@@ -3,6 +3,17 @@
 const clothesData = [
   
   {
+    id: 6,
+    name: "15th Anniversary Armlets (Alex)",
+    description: "These Armlets are a perfect match for the 15th Anniversary Cape given away to celebrate Minecraft's 15th anniversary.",
+    author: "Jurajski Staś",
+    authorLink: "https://www.youtube.com/@JurajskiStas/",
+    category: "Armlets",
+    imageUrl: "https://i.ibb.co/8n3hTs4p/15th-Anniversary-Armlets-Alex-Skin.png",
+    videoUrl: "movie/vid1.mp4",
+    textureUrl: "https://i.ibb.co/QgHjb2x/15th-Anniversary-Armlets-Alex.png",
+  },
+  {
     id: 5,
     name: "15th Anniversary Armlets (Steve)",
     description: "These Armlets are a perfect match for the 15th Anniversary Cape given away to celebrate Minecraft's 15th anniversary.",
