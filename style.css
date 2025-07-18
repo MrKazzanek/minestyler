@@ -207,13 +207,14 @@ button:hover { transform: translateY(-2px); filter: brightness(1.1); }
 button:active { transform: translateY(0); }
 button:disabled { background-color: var(--text-light-color); cursor: not-allowed; transform: none; filter: brightness(0.8); }
 
-/* --- 9. Siatka z Ubraniami - KLUCZOWA POPRAWKA --- */
+/* --- 9. Siatka z Ubraniami --- */
 #clothes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
     overflow-y: auto;
-    padding: 0.25rem; /* Mały padding, by cienie nie były ucinane */
+    padding: 0.25rem;
+    align-items: start; /* KLUCZOWA POPRAWKA: Zapobiega rozciąganiu kafelków w pionie. */
 }
 
 .clothing-tile {
