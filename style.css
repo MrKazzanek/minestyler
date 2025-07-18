@@ -138,7 +138,14 @@ button i { font-size: 1.2rem; }
 #upload-btn:hover, #download-btn:hover { background-color: var(--accent-hover-color); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4); }
 #download-btn:disabled { background-color: var(--text-light-color); cursor: not-allowed; transform: none; box-shadow: none; }
 
-.content-panel { display: flex; flex-direction: column; gap: 1.5rem; flex-grow: 1; min-width: 300px; }
+.content-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+    min-width: 300px;
+    min-height: 0; /* <-- KLUCZOWA POPRAWKA */
+}
 .search-and-filter { background-color: var(--panel-bg-color); padding: 1rem; border-radius: 12px; display: flex; gap: 1rem; align-items: center; box-shadow: 0 4px 15px var(--shadow-color); flex-shrink: 0; }
 .search-bar { flex-grow: 1; position: relative; }
 .search-bar i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light-color); }
@@ -153,7 +160,7 @@ select { padding-left: 1rem; cursor: pointer; }
     overflow-y: auto;
     padding-right: 1rem;
     align-content: start;
-    flex-grow: 1; /* <-- DODANA LINIA */
+    flex-grow: 1;
 }
 
 .clothing-tile { background-color: var(--panel-bg-color); border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; border: 3px solid transparent; }
