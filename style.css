@@ -1,4 +1,4 @@
-/* style.css (OSTATECZNY I PRAWIDŁOWO POPRAWIONY) */
+/* style.css (OSTATECZNY I POPRAWNY) */
 
 :root {
     --font-family: 'Poppins', sans-serif;
@@ -138,14 +138,7 @@ button i { font-size: 1.2rem; }
 #upload-btn:hover, #download-btn:hover { background-color: var(--accent-hover-color); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4); }
 #download-btn:disabled { background-color: var(--text-light-color); cursor: not-allowed; transform: none; box-shadow: none; }
 
-.content-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    flex-grow: 1;
-    min-width: 300px;
-    min-height: 0;
-}
+.content-panel { display: flex; flex-direction: column; gap: 1.5rem; flex-grow: 1; min-width: 300px; }
 .search-and-filter { background-color: var(--panel-bg-color); padding: 1rem; border-radius: 12px; display: flex; gap: 1rem; align-items: center; box-shadow: 0 4px 15px var(--shadow-color); flex-shrink: 0; }
 .search-bar { flex-grow: 1; position: relative; }
 .search-bar i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light-color); }
@@ -160,7 +153,7 @@ select { padding-left: 1rem; cursor: pointer; }
     overflow-y: auto;
     padding-right: 1rem;
     align-content: start;
-    flex-grow: 1;
+    align-items: start; /* <-- DODANA POPRAWKA: Zapobiega pionowemu rozciąganiu kafelków, co naprawia błąd z ich wysokością. */
 }
 
 .clothing-tile { background-color: var(--panel-bg-color); border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; border: 3px solid transparent; }
@@ -171,14 +164,7 @@ select { padding-left: 1rem; cursor: pointer; }
 .tile-media video { opacity: 0; }
 .clothing-tile:hover .tile-media video { opacity: 1; }
 .clothing-tile:hover .tile-media img { opacity: 0; }
-
-.tile-info {
-    padding: 1rem;
-    flex: 1; /* <-- ZMIENIONA WŁAŚCIWOŚĆ */
-    display: flex;
-    flex-direction: column;
-}
-
+.tile-info { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; }
 .tile-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
 .tile-header h4 { font-size: 1.1rem; margin-right: 0.5rem; }
 .download-icon { background: none; border: none; color: var(--text-light-color); cursor: pointer; font-size: 1.4rem; padding: 0; transition: color 0.2s ease; }
